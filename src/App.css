@@ -5,9 +5,17 @@ body {
   margin: 10px;
 }
 
+.App {
+  display: flex;
+  gap: 20px
+}
 .Left-column {
-  width: 60%;
+  flex-grow: 2;
   height: 100%;
+}
+
+.Right-column {
+  flex-grow: 1;
 }
 
 .Search {
@@ -26,6 +34,6 @@ body {
 }
 .Item-description {
   font-size: 12px;
-  padding-bottom: 13px;;
+  padding-bottom: 13px;
   border-bottom: 1px solid silver;
 }

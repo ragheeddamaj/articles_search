@@ -4,6 +4,7 @@ import { Input } from "antd";
 import Listing from "./components/listing/listing";
 import articles_mock from "./mock/articles_mock";
 import { Article } from "./interfaces/article";
+import { Tweet } from "react-tweet";
 
 const App: React.FC<{}> = () => {
   const [searchKeyState, setSearchKeyState] = useState<string>("");
@@ -33,6 +34,9 @@ const App: React.FC<{}> = () => {
           <b>{articlesState.length} Posts</b> were found
         </div>
         <Listing searchKey={searchKeyState} data={articlesState} />
+      </div>
+      <div className="Right-column">
+        <Tweet id="1683920951807971329"  />
       </div>
     </div>
   );
