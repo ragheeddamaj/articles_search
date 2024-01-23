@@ -1,23 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { Input } from "antd";
 import Listing from "./components/listing/listing";
 import articles_mock from "./mock/articles_mock";
+import { Article } from "./interfaces/article";
 
-function App() {
+const App: React.FC<{}> = () => {
+  const [searchKeyState, setSearchKeyState] = useState<string>("");
+  const [articlesState, setArticleState] = useState<Article[]>(articles_mock);
+  useEffect(() => {
+    const articlesFiltered = articles_mock.filter(
+      (item) =>
+        searchKeyState == "" ||
+        (searchKeyState != "" &&
+          (item.title.includes(searchKeyState) ||
+            item.description.includes(searchKeyState)))
+    );
+    setArticleState(articlesFiltered);
+  }, [searchKeyState]);
+
   return (
     <div className="App">
       <div className="Left-column">
         <h2>Search</h2>
-        <Input placeholder="Search articles..." />
+        <Input
+          placeholder="Search articles..."
+          onChange={(e) => {
+            setSearchKeyState(e.target.value);
+          }}
+        />
         <div className="Search">
-          <b>10 Posts</b> were found
+          <b>{articlesState.length} Posts</b> were found
         </div>
-        <Listing data={articles_mock}/>
+        <Listing searchKey={searchKeyState} data={articlesState} />
       </div>
     </div>
   );
-}
+};
 
 export default App;
